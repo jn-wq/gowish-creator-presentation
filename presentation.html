@@ -667,6 +667,65 @@
     margin-top: 6px;
     font-weight: 300;
   }
+
+  /* ── 16:9 PRINT / PDF ── */
+  @media print {
+    @page {
+      size: 338.67mm 190.5mm;
+      margin: 0;
+    }
+
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+    nav, footer { display: none !important; }
+
+    body { background: var(--paper); }
+
+    section {
+      min-height: 100vh;
+      height: 190.5mm;
+      width: 338.67mm;
+      padding: 48px 64px !important;
+      page-break-after: always;
+      page-break-inside: avoid;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    /* Scale down large grids to fit one page */
+    .party-grid,
+    .metrics-grid,
+    .creator-grid,
+    .pillars,
+    .commercial-list {
+      margin-top: 28px !important;
+    }
+
+    .party-card { padding: 24px 20px !important; }
+    .metric-card { padding: 20px 18px !important; }
+    .pillar { padding: 16px 0 !important; }
+    .commercial-item { padding: 16px 0 !important; }
+
+    .display-xl { font-size: 64px !important; }
+    .display-lg { font-size: 44px !important; }
+    .body-lead { font-size: 15px !important; margin-top: 16px !important; }
+    .stat-grid { margin-top: 40px !important; }
+    .stat-num { font-size: 40px !important; }
+
+    .pull-quote { margin: 24px 0 !important; }
+    .section-divider { margin-bottom: 20px !important; }
+
+    /* Case studies: always side by side in print */
+    #cases .fade-in > div[style*="grid-template-columns"] {
+      grid-template-columns: 1fr 1fr !important;
+    }
+
+    /* Fade-in: always visible in print */
+    .fade-in { opacity: 1 !important; transform: none !important; }
+  }
 </style>
 </head>
 <body>
@@ -674,6 +733,10 @@
 <!-- NAV -->
 <nav>
   <a href="#cover" class="nav-logo">GoWish</a>
+  <button onclick="window.print()" style="display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--paper);border:none;padding:10px 22px;font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;opacity:1;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Download PDF
+  </button>
   <ul class="nav-links">
     <li><a href="#model">The Model</a></li>
     <li><a href="#platform">Platform</a></li>
