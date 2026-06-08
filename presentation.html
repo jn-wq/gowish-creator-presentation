@@ -680,95 +680,162 @@
       print-color-adjust: exact !important;
     }
 
-    /* Hide chrome */
     nav, footer, #download-btn { display: none !important; }
 
-    /* Reset body */
-    html, body {
-      width: 338.67mm;
-      background: white !important;
-    }
+    html, body { background: white !important; }
 
-    /* Every section = one full page */
+    .fade-in { opacity: 1 !important; transform: none !important; }
+
+    /* ─ Every section starts on a fresh page ─ */
     section {
       width: 338.67mm !important;
-      height: 190.5mm !important;
-      min-height: unset !important;
-      max-height: 190.5mm !important;
-      padding: 44px 64px !important;
+      padding: 36px 60px !important;
+      page-break-before: always !important;
       page-break-after: always !important;
-      page-break-inside: avoid !important;
+      border-bottom: none !important;
+      box-sizing: border-box !important;
+      display: block !important;
+    }
+
+    /* ─ Sections that fit cleanly on one 16:9 page ─ */
+    #cover, #model, #commercial, #closing {
+      height: 190.5mm !important;
+      max-height: 190.5mm !important;
+      overflow: hidden !important;
       display: flex !important;
       flex-direction: column !important;
       justify-content: center !important;
-      overflow: hidden !important;
-      box-sizing: border-box !important;
-      border-bottom: none !important;
     }
 
-    /* Always visible */
-    .fade-in {
-      opacity: 1 !important;
-      transform: none !important;
+    /* ─ Content-heavy sections: fill naturally, no crop ─ */
+    #about, #platform, #why {
+      min-height: 190.5mm !important;
+      height: auto !important;
+      overflow: visible !important;
     }
 
-    /* Typography scale-down */
-    .display-xl { font-size: 58px !important; line-height: 1.0 !important; }
-    .display-lg { font-size: 44px !important; line-height: 1.05 !important; }
-    .body-lead   { font-size: 14px !important; margin-top: 14px !important; line-height: 1.65 !important; }
-    .eyebrow     { font-size: 9px !important; margin-bottom: 14px !important; }
-    .section-divider { margin-bottom: 20px !important; }
-    .pull-quote  { margin: 20px 0 !important; }
-    .pull-quote p { font-size: 18px !important; }
+    /* ─ Cases: intro+case1 on one page, case2 on next ─ */
+    #cases {
+      min-height: 190.5mm !important;
+      height: auto !important;
+      overflow: visible !important;
+      padding-bottom: 0 !important;
+    }
+    #cases .fade-in:nth-child(3) {
+      page-break-before: always !important;
+      margin-top: 0 !important;
+      padding-top: 36px;
+    }
 
-    /* Cover stats */
-    .stat-grid   { margin-top: 36px !important; padding-top: 24px !important; }
-    .stat-num    { font-size: 40px !important; }
-    .stat-label  { font-size: 9px !important; margin-top: 6px !important; }
+    /* ─ Typography ─ */
+    .display-xl       { font-size: 56px !important; line-height: 1.0 !important; }
+    .display-lg       { font-size: 40px !important; line-height: 1.05 !important; }
+    .body-lead        { font-size: 13px !important; margin-top: 10px !important; line-height: 1.6 !important; }
+    .eyebrow          { font-size: 9px !important; margin-bottom: 10px !important; }
+    .section-divider  { margin-bottom: 14px !important; }
+    .pull-quote       { margin: 14px 0 !important; padding-left: 18px !important; }
+    .pull-quote p     { font-size: 15px !important; line-height: 1.4 !important; }
 
-    /* 3-party grid */
-    .party-grid  { margin-top: 24px !important; grid-template-columns: repeat(3,1fr) !important; }
-    .party-card  { padding: 24px 22px !important; }
-    .party-n     { font-size: 20px !important; margin-bottom: 10px !important; }
-    .party-name  { font-size: 22px !important; margin-bottom: 4px !important; }
-    .party-role  { font-size: 9px !important; margin-bottom: 12px !important; }
-    .party-desc  { font-size: 13px !important; line-height: 1.55 !important; }
+    /* ─ Cover ─ */
+    .stat-grid  { margin-top: 28px !important; padding-top: 18px !important; }
+    .stat-num   { font-size: 38px !important; }
+    .stat-label { font-size: 8px !important; margin-top: 5px !important; }
+    .btn-primary { display: none !important; }
+    .cta-row { display: none !important; }
 
-    /* Metrics grid */
-    .metrics-grid { margin-top: 24px !important; grid-template-columns: repeat(4,1fr) !important; }
-    .metric-card  { padding: 20px 18px !important; }
-    .metric-num   { font-size: 34px !important; }
-    .metric-label { font-size: 9px !important; margin-top: 6px !important; }
-    .metric-sub   { font-size: 11px !important; }
+    /* ─ About: metrics + awards side by side ─ */
+    #about .metrics-grid {
+      margin-top: 16px !important;
+      grid-template-columns: repeat(4,1fr) !important;
+    }
+    #about .metric-card  { padding: 14px 14px !important; }
+    #about .metric-num   { font-size: 28px !important; }
+    #about .metric-label { font-size: 8px !important; margin-top: 5px !important; }
+    #about .metric-sub   { font-size: 10px !important; margin-top: 3px !important; }
+    .awards-row {
+      margin-top: 12px !important;
+      gap: 8px !important;
+      flex-wrap: nowrap !important;
+    }
+    .awards-row > div {
+      padding: 10px 14px !important;
+      min-width: unset !important;
+      flex: 1 !important;
+    }
+    .awards-row > div > span { font-size: 14px !important; }
+    .awards-row > div > div > div:first-child { font-size: 9px !important; }
+    .awards-row > div > div > div:last-child  { font-size: 10px !important; margin-top: 2px !important; }
 
-    /* Pillars */
-    .pillars      { margin-top: 20px !important; }
-    .pillar       { padding: 12px 0 !important; gap: 24px !important; }
-    .pillar-n     { font-size: 36px !important; width: 48px !important; }
-    .pillar-content h3 { font-size: 16px !important; margin-bottom: 4px !important; }
-    .pillar-content p  { font-size: 12px !important; line-height: 1.5 !important; }
+    /* ─ Model ─ */
+    .party-grid { margin-top: 18px !important; grid-template-columns: repeat(3,1fr) !important; }
+    .party-card { padding: 20px 18px !important; }
+    .party-n    { font-size: 18px !important; margin-bottom: 8px !important; }
+    .party-name { font-size: 20px !important; margin-bottom: 4px !important; }
+    .party-role { font-size: 8px !important; margin-bottom: 10px !important; }
+    .party-desc { font-size: 12px !important; line-height: 1.5 !important; }
 
-    /* Commercial */
-    .commercial-list { margin-top: 24px !important; }
-    .commercial-item { padding: 18px 0 !important; gap: 28px !important; }
-    .commercial-n    { font-size: 36px !important; width: 44px !important; }
-    .commercial-content h3 { font-size: 17px !important; margin-bottom: 4px !important; }
-    .commercial-content p  { font-size: 13px !important; line-height: 1.55 !important; }
+    /* ─ Platform ─ */
+    #platform .metrics-grid {
+      margin-top: 16px !important;
+      grid-template-columns: repeat(4,1fr) !important;
+    }
+    #platform .metric-card  { padding: 14px 14px !important; }
+    #platform .metric-num   { font-size: 28px !important; }
+    #platform .metric-label { font-size: 8px !important; margin-top: 5px !important; }
+    #platform .metric-sub   { font-size: 10px !important; }
+    .scale-grid {
+      grid-template-columns: repeat(3,1fr) !important;
+      margin-top: 8px !important;
+    }
+    .scale-grid > div { padding: 16px 18px !important; }
+    .scale-grid > div > div:first-child { font-size: 14px !important; margin-bottom: 5px !important; }
+    .scale-grid > div > p { font-size: 11px !important; line-height: 1.5 !important; }
 
-    /* Awards badges */
-    .awards-row { margin-top: 24px !important; gap: 12px !important; }
+    /* ─ Why GoWish ─ */
+    .pillars     { margin-top: 14px !important; }
+    .pillar      { padding: 10px 0 !important; gap: 20px !important; flex-direction: row !important; }
+    .pillar-n    { font-size: 30px !important; width: 40px !important; flex-shrink: 0 !important; }
+    .pillar-content h3 { font-size: 14px !important; margin-bottom: 3px !important; }
+    .pillar-content p  { font-size: 11px !important; line-height: 1.45 !important; max-width: none !important; }
 
-    /* Platform scale grid */
-    .scale-grid { grid-template-columns: repeat(3,1fr) !important; }
+    /* ─ Commercial ─ */
+    .commercial-list  { margin-top: 18px !important; }
+    .commercial-item  { padding: 16px 0 !important; gap: 24px !important; }
+    .commercial-n     { font-size: 32px !important; width: 40px !important; }
+    .commercial-content h3 { font-size: 16px !important; margin-bottom: 4px !important; }
+    .commercial-content p  { font-size: 12px !important; line-height: 1.5 !important; max-width: none !important; }
 
-    /* Cases: always 2-col */
-    #cases .fade-in > div[style*="grid-template-columns"] {
+    /* ─ Cases ─ */
+    #cases .fade-in:nth-child(2) { margin-top: 16px !important; }
+    #cases > .fade-in:first-child .display-lg { font-size: 32px !important; }
+    #cases > .fade-in:first-child .body-lead  { font-size: 12px !important; }
+
+    /* Case cards: tight */
+    #cases .fade-in > div > div {
       grid-template-columns: 1fr 1fr !important;
     }
+    #cases [style*="padding: 48px 40px"] {
+      padding: 24px 28px !important;
+    }
+    #cases [style*="font-size: 28px"] {
+      font-size: 18px !important;
+      margin-bottom: 10px !important;
+    }
+    #cases [style*="font-size: 14px; line-height: 1.8"] {
+      font-size: 12px !important;
+      line-height: 1.5 !important;
+      margin-bottom: 12px !important;
+    }
+    #cases [style*="font-size: 56px"] { font-size: 36px !important; }
+    #cases [style*="font-size: 64px"] { font-size: 40px !important; }
+    #cases [style*="gap: 32px"]       { gap: 16px !important; }
+    #cases [style*="padding: 24px 40px"] { padding: 14px 28px !important; }
+    #cases [style*="font-size: 16px; font-style: italic"] { font-size: 12px !important; }
 
-    /* Closing */
+    /* ─ Closing ─ */
     #closing { text-align: center !important; align-items: center !important; }
     #closing .display-xl { font-size: 52px !important; }
+    #closing .contact-block { margin-top: 32px !important; padding-top: 24px !important; }
   }
 </style>
 </head>
