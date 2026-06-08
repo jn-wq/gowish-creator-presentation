@@ -668,175 +668,7 @@
     font-weight: 300;
   }
 
-  /* ── PRINT / PDF ── */
-  @media print {
-    @page {
-      size: 338.67mm 190.5mm landscape;
-      margin: 0;
-    }
-
-    * {
-      -webkit-print-color-adjust: exact !important;
-      print-color-adjust: exact !important;
-    }
-
-    nav, footer, #download-btn { display: none !important; }
-
-    html, body { background: white !important; }
-
-    .fade-in { opacity: 1 !important; transform: none !important; }
-
-    /* ─ Every section starts on a fresh page ─ */
-    section {
-      width: 338.67mm !important;
-      padding: 36px 60px !important;
-      page-break-before: always !important;
-      page-break-after: always !important;
-      border-bottom: none !important;
-      box-sizing: border-box !important;
-      display: block !important;
-    }
-
-    /* ─ Sections that fit cleanly on one 16:9 page ─ */
-    #cover, #model, #commercial, #closing {
-      height: 190.5mm !important;
-      max-height: 190.5mm !important;
-      overflow: hidden !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: center !important;
-    }
-
-    /* ─ Content-heavy sections: fill naturally, no crop ─ */
-    #about, #platform, #why {
-      min-height: 190.5mm !important;
-      height: auto !important;
-      overflow: visible !important;
-    }
-
-    /* ─ Cases: intro+case1 on one page, case2 on next ─ */
-    #cases {
-      min-height: 190.5mm !important;
-      height: auto !important;
-      overflow: visible !important;
-      padding-bottom: 0 !important;
-    }
-    #cases .fade-in:nth-child(3) {
-      page-break-before: always !important;
-      margin-top: 0 !important;
-      padding-top: 36px;
-    }
-
-    /* ─ Typography ─ */
-    .display-xl       { font-size: 56px !important; line-height: 1.0 !important; }
-    .display-lg       { font-size: 40px !important; line-height: 1.05 !important; }
-    .body-lead        { font-size: 13px !important; margin-top: 10px !important; line-height: 1.6 !important; }
-    .eyebrow          { font-size: 9px !important; margin-bottom: 10px !important; }
-    .section-divider  { margin-bottom: 14px !important; }
-    .pull-quote       { margin: 14px 0 !important; padding-left: 18px !important; }
-    .pull-quote p     { font-size: 15px !important; line-height: 1.4 !important; }
-
-    /* ─ Cover ─ */
-    .stat-grid  { margin-top: 28px !important; padding-top: 18px !important; }
-    .stat-num   { font-size: 38px !important; }
-    .stat-label { font-size: 8px !important; margin-top: 5px !important; }
-    .btn-primary { display: none !important; }
-    .cta-row { display: none !important; }
-
-    /* ─ About: metrics + awards side by side ─ */
-    #about .metrics-grid {
-      margin-top: 16px !important;
-      grid-template-columns: repeat(4,1fr) !important;
-    }
-    #about .metric-card  { padding: 14px 14px !important; }
-    #about .metric-num   { font-size: 28px !important; }
-    #about .metric-label { font-size: 8px !important; margin-top: 5px !important; }
-    #about .metric-sub   { font-size: 10px !important; margin-top: 3px !important; }
-    .awards-row {
-      margin-top: 12px !important;
-      gap: 8px !important;
-      flex-wrap: nowrap !important;
-    }
-    .awards-row > div {
-      padding: 10px 14px !important;
-      min-width: unset !important;
-      flex: 1 !important;
-    }
-    .awards-row > div > span { font-size: 14px !important; }
-    .awards-row > div > div > div:first-child { font-size: 9px !important; }
-    .awards-row > div > div > div:last-child  { font-size: 10px !important; margin-top: 2px !important; }
-
-    /* ─ Model ─ */
-    .party-grid { margin-top: 18px !important; grid-template-columns: repeat(3,1fr) !important; }
-    .party-card { padding: 20px 18px !important; }
-    .party-n    { font-size: 18px !important; margin-bottom: 8px !important; }
-    .party-name { font-size: 20px !important; margin-bottom: 4px !important; }
-    .party-role { font-size: 8px !important; margin-bottom: 10px !important; }
-    .party-desc { font-size: 12px !important; line-height: 1.5 !important; }
-
-    /* ─ Platform ─ */
-    #platform .metrics-grid {
-      margin-top: 16px !important;
-      grid-template-columns: repeat(4,1fr) !important;
-    }
-    #platform .metric-card  { padding: 14px 14px !important; }
-    #platform .metric-num   { font-size: 28px !important; }
-    #platform .metric-label { font-size: 8px !important; margin-top: 5px !important; }
-    #platform .metric-sub   { font-size: 10px !important; }
-    .scale-grid {
-      grid-template-columns: repeat(3,1fr) !important;
-      margin-top: 8px !important;
-    }
-    .scale-grid > div { padding: 16px 18px !important; }
-    .scale-grid > div > div:first-child { font-size: 14px !important; margin-bottom: 5px !important; }
-    .scale-grid > div > p { font-size: 11px !important; line-height: 1.5 !important; }
-
-    /* ─ Why GoWish ─ */
-    .pillars     { margin-top: 14px !important; }
-    .pillar      { padding: 10px 0 !important; gap: 20px !important; flex-direction: row !important; }
-    .pillar-n    { font-size: 30px !important; width: 40px !important; flex-shrink: 0 !important; }
-    .pillar-content h3 { font-size: 14px !important; margin-bottom: 3px !important; }
-    .pillar-content p  { font-size: 11px !important; line-height: 1.45 !important; max-width: none !important; }
-
-    /* ─ Commercial ─ */
-    .commercial-list  { margin-top: 18px !important; }
-    .commercial-item  { padding: 16px 0 !important; gap: 24px !important; }
-    .commercial-n     { font-size: 32px !important; width: 40px !important; }
-    .commercial-content h3 { font-size: 16px !important; margin-bottom: 4px !important; }
-    .commercial-content p  { font-size: 12px !important; line-height: 1.5 !important; max-width: none !important; }
-
-    /* ─ Cases ─ */
-    #cases .fade-in:nth-child(2) { margin-top: 16px !important; }
-    #cases > .fade-in:first-child .display-lg { font-size: 32px !important; }
-    #cases > .fade-in:first-child .body-lead  { font-size: 12px !important; }
-
-    /* Case cards: tight */
-    #cases .fade-in > div > div {
-      grid-template-columns: 1fr 1fr !important;
-    }
-    #cases [style*="padding: 48px 40px"] {
-      padding: 24px 28px !important;
-    }
-    #cases [style*="font-size: 28px"] {
-      font-size: 18px !important;
-      margin-bottom: 10px !important;
-    }
-    #cases [style*="font-size: 14px; line-height: 1.8"] {
-      font-size: 12px !important;
-      line-height: 1.5 !important;
-      margin-bottom: 12px !important;
-    }
-    #cases [style*="font-size: 56px"] { font-size: 36px !important; }
-    #cases [style*="font-size: 64px"] { font-size: 40px !important; }
-    #cases [style*="gap: 32px"]       { gap: 16px !important; }
-    #cases [style*="padding: 24px 40px"] { padding: 14px 28px !important; }
-    #cases [style*="font-size: 16px; font-style: italic"] { font-size: 12px !important; }
-
-    /* ─ Closing ─ */
-    #closing { text-align: center !important; align-items: center !important; }
-    #closing .display-xl { font-size: 52px !important; }
-    #closing .contact-block { margin-top: 32px !important; padding-top: 24px !important; }
-  }
+  @media print { nav, footer, #download-btn { display: none !important; } }
 </style>
 </head>
 <body>
@@ -844,7 +676,7 @@
 <!-- NAV -->
 <nav>
   <a href="#cover" class="nav-logo">GoWish</a>
-  <button id="download-btn" onclick="window.print()" style="display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--paper);border:none;padding:10px 22px;font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;opacity:1;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">
+  <button id="download-btn" onclick="downloadPDF()" style="display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--paper);border:none;padding:10px 22px;font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;opacity:1;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
     Download PDF
   </button>
@@ -1300,6 +1132,66 @@
   </div>
 </section>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+  async function downloadPDF() {
+    const btn = document.getElementById('download-btn');
+    const originalHTML = btn.innerHTML;
+    btn.innerHTML = '⏳ Generating PDF...';
+    btn.disabled = true;
+
+    // Make all fade-in elements visible before capture
+    document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [1920, 1080], compress: true });
+
+    const sections = document.querySelectorAll('section[id]');
+    let first = true;
+
+    for (const section of sections) {
+      const canvas = await html2canvas(section, {
+        scale: 1,
+        useCORS: true,
+        allowTaint: true,
+        logging: false,
+        width: section.scrollWidth,
+        height: section.scrollHeight,
+        windowWidth: 1920,
+        backgroundColor: null
+      });
+
+      const imgData = canvas.toDataURL('image/jpeg', 0.92);
+      const iw = canvas.width;
+      const ih = canvas.height;
+
+      // Scale to fill 1920×1080 (letterbox if needed)
+      const scale = Math.min(1920 / iw, 1080 / ih);
+      const sw = iw * scale;
+      const sh = ih * scale;
+      const x = (1920 - sw) / 2;
+      const y = (1080 - sh) / 2;
+
+      if (!first) pdf.addPage([1920, 1080], 'landscape');
+
+      // Fill background with section bg colour
+      const bg = window.getComputedStyle(section).backgroundColor;
+      const rgb = bg.match(/\d+/g);
+      if (rgb) {
+        pdf.setFillColor(parseInt(rgb[0]), parseInt(rgb[1]), parseInt(rgb[2]));
+        pdf.rect(0, 0, 1920, 1080, 'F');
+      }
+
+      pdf.addImage(imgData, 'JPEG', x, y, sw, sh);
+      first = false;
+    }
+
+    pdf.save('GoWish-Creator-Presentation.pdf');
+    btn.innerHTML = originalHTML;
+    btn.disabled = false;
+  }
+</script>
 <script>
   // Fade in on scroll
   const observer = new IntersectionObserver((entries) => {
