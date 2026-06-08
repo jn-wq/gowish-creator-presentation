@@ -668,63 +668,107 @@
     font-weight: 300;
   }
 
-  /* ── 16:9 PRINT / PDF ── */
+  /* ── PRINT / PDF ── */
   @media print {
     @page {
-      size: 338.67mm 190.5mm;
+      size: 338.67mm 190.5mm landscape;
       margin: 0;
     }
 
-    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
 
-    nav, footer { display: none !important; }
+    /* Hide chrome */
+    nav, footer, #download-btn { display: none !important; }
 
-    body { background: var(--paper); }
-
-    section {
-      min-height: 100vh;
-      height: 190.5mm;
+    /* Reset body */
+    html, body {
       width: 338.67mm;
-      padding: 48px 64px !important;
-      page-break-after: always;
-      page-break-inside: avoid;
+      background: white !important;
+    }
+
+    /* Every section = one full page */
+    section {
+      width: 338.67mm !important;
+      height: 190.5mm !important;
+      min-height: unset !important;
+      max-height: 190.5mm !important;
+      padding: 44px 64px !important;
+      page-break-after: always !important;
+      page-break-inside: avoid !important;
       display: flex !important;
       flex-direction: column !important;
       justify-content: center !important;
-      overflow: hidden;
-      box-sizing: border-box;
+      overflow: hidden !important;
+      box-sizing: border-box !important;
+      border-bottom: none !important;
     }
 
-    /* Scale down large grids to fit one page */
-    .party-grid,
-    .metrics-grid,
-    .creator-grid,
-    .pillars,
-    .commercial-list {
-      margin-top: 28px !important;
+    /* Always visible */
+    .fade-in {
+      opacity: 1 !important;
+      transform: none !important;
     }
 
-    .party-card { padding: 24px 20px !important; }
-    .metric-card { padding: 20px 18px !important; }
-    .pillar { padding: 16px 0 !important; }
-    .commercial-item { padding: 16px 0 !important; }
-
-    .display-xl { font-size: 64px !important; }
-    .display-lg { font-size: 44px !important; }
-    .body-lead { font-size: 15px !important; margin-top: 16px !important; }
-    .stat-grid { margin-top: 40px !important; }
-    .stat-num { font-size: 40px !important; }
-
-    .pull-quote { margin: 24px 0 !important; }
+    /* Typography scale-down */
+    .display-xl { font-size: 58px !important; line-height: 1.0 !important; }
+    .display-lg { font-size: 44px !important; line-height: 1.05 !important; }
+    .body-lead   { font-size: 14px !important; margin-top: 14px !important; line-height: 1.65 !important; }
+    .eyebrow     { font-size: 9px !important; margin-bottom: 14px !important; }
     .section-divider { margin-bottom: 20px !important; }
+    .pull-quote  { margin: 20px 0 !important; }
+    .pull-quote p { font-size: 18px !important; }
 
-    /* Case studies: always side by side in print */
+    /* Cover stats */
+    .stat-grid   { margin-top: 36px !important; padding-top: 24px !important; }
+    .stat-num    { font-size: 40px !important; }
+    .stat-label  { font-size: 9px !important; margin-top: 6px !important; }
+
+    /* 3-party grid */
+    .party-grid  { margin-top: 24px !important; grid-template-columns: repeat(3,1fr) !important; }
+    .party-card  { padding: 24px 22px !important; }
+    .party-n     { font-size: 20px !important; margin-bottom: 10px !important; }
+    .party-name  { font-size: 22px !important; margin-bottom: 4px !important; }
+    .party-role  { font-size: 9px !important; margin-bottom: 12px !important; }
+    .party-desc  { font-size: 13px !important; line-height: 1.55 !important; }
+
+    /* Metrics grid */
+    .metrics-grid { margin-top: 24px !important; grid-template-columns: repeat(4,1fr) !important; }
+    .metric-card  { padding: 20px 18px !important; }
+    .metric-num   { font-size: 34px !important; }
+    .metric-label { font-size: 9px !important; margin-top: 6px !important; }
+    .metric-sub   { font-size: 11px !important; }
+
+    /* Pillars */
+    .pillars      { margin-top: 20px !important; }
+    .pillar       { padding: 12px 0 !important; gap: 24px !important; }
+    .pillar-n     { font-size: 36px !important; width: 48px !important; }
+    .pillar-content h3 { font-size: 16px !important; margin-bottom: 4px !important; }
+    .pillar-content p  { font-size: 12px !important; line-height: 1.5 !important; }
+
+    /* Commercial */
+    .commercial-list { margin-top: 24px !important; }
+    .commercial-item { padding: 18px 0 !important; gap: 28px !important; }
+    .commercial-n    { font-size: 36px !important; width: 44px !important; }
+    .commercial-content h3 { font-size: 17px !important; margin-bottom: 4px !important; }
+    .commercial-content p  { font-size: 13px !important; line-height: 1.55 !important; }
+
+    /* Awards badges */
+    .awards-row { margin-top: 24px !important; gap: 12px !important; }
+
+    /* Platform scale grid */
+    .scale-grid { grid-template-columns: repeat(3,1fr) !important; }
+
+    /* Cases: always 2-col */
     #cases .fade-in > div[style*="grid-template-columns"] {
       grid-template-columns: 1fr 1fr !important;
     }
 
-    /* Fade-in: always visible in print */
-    .fade-in { opacity: 1 !important; transform: none !important; }
+    /* Closing */
+    #closing { text-align: center !important; align-items: center !important; }
+    #closing .display-xl { font-size: 52px !important; }
   }
 </style>
 </head>
@@ -733,7 +777,7 @@
 <!-- NAV -->
 <nav>
   <a href="#cover" class="nav-logo">GoWish</a>
-  <button onclick="window.print()" style="display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--paper);border:none;padding:10px 22px;font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;opacity:1;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">
+  <button id="download-btn" onclick="window.print()" style="display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--paper);border:none;padding:10px 22px;font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;opacity:1;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
     Download PDF
   </button>
