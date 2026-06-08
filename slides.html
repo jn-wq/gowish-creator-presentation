@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>GoWish × Creator × Brand — Slides</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ink: #0A0A0A;
+    --paper: #F7F4EE;
+    --beige: #E8DFD1;
+    --taupe: #C9A88B;
+    --muted: #6B6560;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #333;
+  }
+
+  /* Each slide is exactly 1920×1080 */
+  .slide {
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 96px 128px;
+    background: var(--paper);
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    @page { size: 1920px 1080px; margin: 0; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { background: none; }
+  }
+
+  /* ── PREVIEW (screen) ── */
+  @media screen {
+    .slide {
+      margin: 0 auto 4px;
+      transform-origin: top left;
+    }
+    body { display: flex; flex-direction: column; align-items: center; }
+  }
+
+  /* ── TYPOGRAPHY ── */
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+  .eyebrow-light { color: rgba(247,244,238,0.45); }
+
+  .display {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    letter-spacing: -0.025em;
+    line-height: 1.0;
+  }
+  .display-xl { font-size: 100px; }
+  .display-lg { font-size: 72px; }
+  .display-md { font-size: 52px; }
+
+  .accent { color: var(--taupe); font-style: italic; }
+
+  .body {
+    font-size: 22px;
+    line-height: 1.7;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 900px;
+    margin-top: 28px;
+  }
+
+  .divider {
+    width: 48px;
+    height: 2px;
+    background: var(--taupe);
+    margin-bottom: 40px;
+  }
+
+  /* ── DARK SLIDE ── */
+  .slide-dark {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .slide-dark .eyebrow { color: rgba(247,244,238,0.4); }
+  .slide-dark .body { color: rgba(247,244,238,0.6); }
+
+  /* ── BEIGE SLIDE ── */
+  .slide-beige { background: var(--beige); }
+
+  /* ── STAT ROW ── */
+  .stat-row {
+    display: flex;
+    gap: 0;
+    border-top: 1px solid rgba(10,10,10,0.12);
+    margin-top: 72px;
+    padding-top: 48px;
+  }
+  .slide-dark .stat-row { border-color: rgba(247,244,238,0.12); }
+
+  .stat { flex: 1; padding-right: 32px; }
+  .stat-num {
+    font-family: 'Fraunces', serif;
+    font-size: 64px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--paper);
+  }
+  .stat-num-dark { color: var(--ink); }
+  .stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(247,244,238,0.45);
+    margin-top: 12px;
+  }
+  .stat-label-dark { color: var(--muted); }
+
+  /* ── 3-COL GRID ── */
+  .col3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(10,10,10,0.1);
+    border: 1px solid rgba(10,10,10,0.1);
+    margin-top: 56px;
+  }
+
+  .col3-card {
+    background: var(--paper);
+    padding: 48px 44px;
+  }
+
+  .col3-n {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: rgba(10,10,10,0.18);
+    margin-bottom: 20px;
+  }
+
+  .col3-title {
+    font-family: 'Fraunces', serif;
+    font-size: 30px;
+    font-weight: 300;
+    margin-bottom: 8px;
+  }
+
+  .col3-role {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--taupe);
+    margin-bottom: 20px;
+  }
+
+  .col3-desc {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ── 4-COL METRICS ── */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: rgba(10,10,10,0.1);
+    border: 1px solid rgba(10,10,10,0.1);
+    margin-top: 56px;
+  }
+
+  .metric {
+    background: var(--paper);
+    padding: 44px 36px;
+  }
+  .metric-dark { background: rgba(255,255,255,0.05); }
+
+  .metric-num {
+    font-family: 'Fraunces', serif;
+    font-size: 52px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .metric-num-light { color: var(--paper); }
+
+  .metric-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+  .metric-label-light { color: rgba(247,244,238,0.45); }
+
+  .metric-sub {
+    font-size: 14px;
+    color: var(--taupe);
+    margin-top: 6px;
+    font-weight: 300;
+  }
+
+  /* ── PILLAR LIST ── */
+  .pillar-list { margin-top: 40px; }
+  .pillar {
+    display: flex;
+    align-items: flex-start;
+    gap: 36px;
+    border-top: 1px solid rgba(10,10,10,0.1);
+    padding: 22px 0;
+  }
+  .pillar-n {
+    font-family: 'Fraunces', serif;
+    font-size: 44px;
+    font-weight: 300;
+    color: rgba(10,10,10,0.15);
+    line-height: 1;
+    width: 56px;
+    flex-shrink: 0;
+  }
+  .pillar-title {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+  .pillar-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 680px;
+  }
+
+  /* ── COMMERCIAL ── */
+  .commercial-list { margin-top: 48px; }
+  .commercial-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    border-top: 1px solid rgba(10,10,10,0.1);
+    padding: 28px 0;
+  }
+  .commercial-n {
+    font-family: 'Fraunces', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: rgba(10,10,10,0.12);
+    line-height: 1;
+    width: 60px;
+    flex-shrink: 0;
+  }
+  .commercial-title {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+  .commercial-desc {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 740px;
+  }
+
+  /* ── CASE SLIDE ── */
+  .case-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: rgba(10,10,10,0.1);
+    border: 1px solid rgba(10,10,10,0.1);
+    flex: 1;
+    margin-top: 40px;
+  }
+
+  .case-left {
+    background: var(--paper);
+    padding: 48px 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .case-right {
+    background: var(--ink);
+    padding: 48px 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+  }
+
+  .case-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--taupe);
+    margin-bottom: 16px;
+  }
+
+  .case-title {
+    font-family: 'Fraunces', serif;
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .case-body {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  .case-stat-num {
+    font-family: 'Fraunces', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--paper);
+    line-height: 1;
+  }
+  .case-stat-num.accent { color: var(--taupe); font-style: normal; }
+
+  .case-stat-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(247,244,238,0.4);
+    margin-top: 6px;
+  }
+
+  .case-rule { width: 100%; height: 1px; background: rgba(247,244,238,0.1); }
+
+  /* ── AWARDS ── */
+  .awards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 48px;
+  }
+
+  .award {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    border: 1px solid rgba(10,10,10,0.12);
+    padding: 20px 28px;
+    background: var(--beige);
+    flex: 1;
+    min-width: 380px;
+  }
+
+  .award-icon { font-size: 24px; flex-shrink: 0; }
+
+  .award-title {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .award-desc {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ── CLOSING ── */
+  .slide-closing {
+    background: var(--ink);
+    align-items: center;
+    text-align: center;
+  }
+  .slide-closing .display-xl { color: var(--paper); max-width: 14ch; margin: 0 auto; }
+  .slide-closing .body { color: rgba(247,244,238,0.55); max-width: 560px; margin: 24px auto 0; text-align: center; }
+
+  .contact-block {
+    margin-top: 48px;
+    padding-top: 36px;
+    border-top: 1px solid rgba(247,244,238,0.12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .contact-name {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--paper);
+  }
+  .contact-title {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(247,244,238,0.4);
+  }
+  .contact-email {
+    font-size: 16px;
+    color: var(--taupe);
+    margin-top: 4px;
+  }
+
+  /* ── LOGO WATERMARK ── */
+  .logo-mark {
+    position: absolute;
+    bottom: 40px;
+    right: 60px;
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    opacity: 0.18;
+  }
+  .logo-mark-light { color: var(--paper); }
+  .logo-mark-dark { color: var(--ink); }
+
+  /* ── DOWNLOAD BUTTON ── */
+  #download-btn {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    z-index: 999;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 14px 28px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  #download-btn:hover { opacity: 0.8; }
+
+  @media print {
+    #download-btn { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<button id="download-btn" onclick="window.print()">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+  Download PDF
+</button>
+
+<!-- ── SLIDE 1: COVER ── -->
+<div class="slide slide-dark">
+  <p class="eyebrow eyebrow-light">An Exclusive Partnership Concept</p>
+  <h1 class="display display-xl" style="color: var(--paper); line-height: 1.0;">
+    GoWish ×<br>Creator ×<br><span class="accent">Their Brand</span>
+  </h1>
+  <div class="stat-row">
+    <div class="stat">
+      <div class="stat-num">20M+</div>
+      <div class="stat-label">Global users</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">38.3M</div>
+      <div class="stat-label">Active wishlists</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">825M+</div>
+      <div class="stat-label">Active product wishes</div>
+    </div>
+  </div>
+  <span class="logo-mark logo-mark-light">GoWish</span>
+</div>
+
+<!-- ── SLIDE 2: ABOUT ── -->
+<div class="slide">
+  <p class="eyebrow">About GoWish</p>
+  <div class="divider"></div>
+  <h2 class="display display-lg">An inspiration platform<br>with <span class="accent">intent.</span></h2>
+  <p class="body">
+    GoWish is one of Scandinavia's biggest platforms — a wishlist-native destination where 20 million users
+    save, share, and gift products they actually want. Unlike social media, GoWish captures
+    declared purchase intent, not just impressions.
+  </p>
+  <div class="awards">
+    <div class="award">
+      <span class="award-icon">🏆</span>
+      <div>
+        <div class="award-title">2× TikTok Case Study Award</div>
+        <div class="award-desc">Recognised by TikTok for outstanding campaign performance</div>
+      </div>
+    </div>
+    <div class="award">
+      <span class="award-icon">👻</span>
+      <div>
+        <div class="award-title">Snapchat Case Study & Investor Letter</div>
+        <div class="award-desc">Featured in Snapchat commerce case study and investor letters</div>
+      </div>
+    </div>
+    <div class="award">
+      <span class="award-icon">🇺🇸</span>
+      <div>
+        <div class="award-title">Multiple #1 Most Downloaded — US App Store</div>
+        <div class="award-desc">Ranked #1 most downloaded app in the United States multiple times</div>
+      </div>
+    </div>
+  </div>
+  <span class="logo-mark logo-mark-dark">GoWish</span>
+</div>
+
+<!-- ── SLIDE 3: PLATFORM SCALE ── -->
+<div class="slide slide-dark">
+  <p class="eyebrow eyebrow-light">Platform Scale</p>
+  <h2 class="display display-lg" style="color: var(--paper);">One of Scandinavia's<br>biggest platforms —<br><span class="accent">already working.</span></h2>
+  <div class="stat-row">
+    <div class="stat">
+      <div class="stat-num">61K+</div>
+      <div class="stat-label">Brands & merchants active</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">825M+</div>
+      <div class="stat-label">Active wishes</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3.4B+</div>
+      <div class="stat-label">GMV facilitated</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">6.5M+</div>
+      <div class="stat-label">Conversions tracked</div>
+    </div>
+  </div>
+  <span class="logo-mark logo-mark-light">GoWish</span>
+</div>
+
+<!-- ── SLIDE 4: THE MODEL ── -->
+<div class="slide">
+  <p class="eyebrow">The Partnership Model</p>
+  <div class="divider"></div>
+  <h2 class="display display-md">Three parties. One campaign. <span class="accent">Shared upside.</span></h2>
+  <div class="col3">
+    <div class="col3-card">
+      <div class="col3-n">01</div>
+      <div class="col3-title">GoWish</div>
+      <div class="col3-role">Distribution & Marketing</div>
+      <div class="col3-desc">Funds and executes paid social on Meta & TikTok. Provides the wishlist platform and 20M+ users with active purchase intent — zero upfront cost to the brand.</div>
+    </div>
+    <div class="col3-card">
+      <div class="col3-n">02</div>
+      <div class="col3-title">The Creator</div>
+      <div class="col3-role">Trust & Reach</div>
+      <div class="col3-desc">Provides likeness for video + image ads. Amplifies organically across owned channels. As the founder of the brand, their authenticity is the campaign — not a paid endorsement.</div>
+    </div>
+    <div class="col3-card">
+      <div class="col3-n">03</div>
+      <div class="col3-title">Their Brand</div>
+      <div class="col3-role">Product & Fulfilment</div>
+      <div class="col3-desc">Provides products, pricing, and fulfilment. Receives new, high-intent customers at scale. Creator captures 20% commission on every tracked sale — from their own brand.</div>
+    </div>
+  </div>
+  <span class="logo-mark logo-mark-dark">GoWish</span>
+</div>
+
+<!-- ── SLIDE 5: WHY GOWISH ── -->
+<div class="slide slide-beige">
+  <p class="eyebrow">Why GoWish</p>
+  <div class="divider"></div>
+  <h2 class="display display-md">Five reasons the creator-brand<br>model <span class="accent">wins here.</span></h2>
+  <div class="pillar-list">
+    <div class="pillar">
+      <div class="pillar-n">01</div>
+      <div>
+        <div class="pillar-title">Wishlist intent is purchase intent</div>
+        <div class="pillar-desc">When a user saves a product on GoWish, they've declared they want it — or want to gift it. Every save is a warm lead, not a view.</div>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-n">02</div>
+      <div>
+        <div class="pillar-title">GoWish funds the paid social</div>
+        <div class="pillar-desc">Meta and TikTok ad spend covered entirely by GoWish. Zero ad budget required from the brand.</div>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-n">03</div>
+      <div>
+        <div class="pillar-title">20M+ users who already gift</div>
+        <div class="pillar-desc">GoWish's user base is gift-active — they share lists, buy for others, and return for every seasonal moment.</div>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-n">04</div>
+      <div>
+        <div class="pillar-title">Full attribution, not impressions</div>
+        <div class="pillar-desc">Every sale tracked from wishlist save to checkout. 20% commission paid on real revenue only — no vanity metrics.</div>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-n">05</div>
+      <div>
+        <div class="pillar-title">Global distribution, local relevance</div>
+        <div class="pillar-desc">GoWish operates across 15+ markets with localised campaigns — without the brand building that stack themselves.</div>
+      </div>
+    </div>
+  </div>
+  <span class="logo-mark logo-mark-dark">GoWish</span>
+</div>
+
+<!-- ── SLIDE 6: COMMERCIAL MODEL ── -->
+<div class="slide">
+  <p class="eyebrow">The Commercial Model</p>
+  <div class="divider"></div>
+  <h2 class="display display-md">How everyone <span class="accent">gets paid.</span></h2>
+  <div class="commercial-list">
+    <div class="commercial-item">
+      <div class="commercial-n">01</div>
+      <div>
+        <div class="commercial-title">20% commission on tracked sales</div>
+        <div class="commercial-desc">Creator earns 20% on every sale attributed through GoWish. No flat fees, no minimum guarantees. Only pays when GoWish delivers paying customers.</div>
+      </div>
+    </div>
+    <div class="commercial-item">
+      <div class="commercial-n">02</div>
+      <div>
+        <div class="commercial-title">GoWish funds & runs paid social</div>
+        <div class="commercial-desc">Meta and TikTok ad spend covered entirely by GoWish. We create, run, and optimise the campaigns. Zero ad budget required from the brand.</div>
+      </div>
+    </div>
+    <div class="commercial-item">
+      <div class="commercial-n">03</div>
+      <div>
+        <div class="commercial-title">Creator licenses likeness for ads</div>
+        <div class="commercial-desc">Creator grants GoWish a scoped, time-bound licence to use their image in campaign ads. As the founder of the brand, this is authentic storytelling — not a paid endorsement.</div>
+      </div>
+    </div>
+  </div>
+  <span class="logo-mark logo-mark-dark">GoWish</span>
+</div>
+
+<!-- ── SLIDE 7: CASE 01 ── -->
+<div class="slide" style="padding: 64px 96px 48px;">
+  <p class="eyebrow">Proven Results — Case 01 · Fashion</p>
+  <div class="case-split">
+    <div class="case-left">
+      <div class="case-tag">American Clothing Brand · US Market</div>
+      <div class="case-title">Popular US fashion brand drives $3.1M in revenue via GoWish — in 3 months.</div>
+      <div class="case-body">
+        A leading American clothing brand — jackets, pants, shoes — had a loyal following but was leaving revenue on the table between campaigns. By launching a Premium GoWish partnership, their products entered GoWish's inspirational universe: in front of high-intent shoppers who save, share, and gift fashion.<br><br>
+        52,400 wishes created. $3.1M in tracked revenue. All from the US market alone, in 3 months.
+      </div>
+      <div style="margin-top: 20px; font-size: 12px; color: var(--muted); font-weight: 300; font-style: italic;">Brand anonymised per GoWish privacy policy — we work with 61,000+ brands and respect their revenue data.</div>
+    </div>
+    <div class="case-right">
+      <div>
+        <div class="case-stat-num">$3.1M</div>
+        <div class="case-stat-label">Revenue via GoWish · US only · 3 months</div>
+      </div>
+      <div class="case-rule"></div>
+      <div>
+        <div class="case-stat-num">52,400</div>
+        <div class="case-stat-label">Wishes created by users</div>
+      </div>
+      <div class="case-rule"></div>
+      <div>
+        <div class="case-stat-num">$143</div>
+        <div class="case-stat-label">Average order value (USD)</div>
+      </div>
+      <div class="case-rule"></div>
+      <div>
+        <div class="case-stat-num accent">20%</div>
+        <div class="case-stat-label">Creator payout on tracked sales</div>
+      </div>
+    </div>
+  </div>
+  <span class="logo-mark logo-mark-dark">GoWish</span>
+</div>
+
+<!-- ── SLIDE 8: CASE 02 ── -->
+<div class="slide" style="padding: 64px 96px 48px;">
+  <p class="eyebrow">Proven Results — Case 02 · Multi-Category</p>
+  <div class="case-split">
+    <div class="case-right" style="background: var(--ink);">
+      <div>
+        <div class="case-stat-num">$1.7M</div>
+        <div class="case-stat-label">Revenue for the brand · 2 months</div>
+      </div>
+      <div class="case-rule"></div>
+      <div>
+        <div class="case-stat-num">+57%</div>
+        <div class="case-stat-label">Increase in conversions</div>
+      </div>
+      <div class="case-rule"></div>
+      <div>
+        <div class="case-stat-num">+98%</div>
+        <div class="case-stat-label">More wishes generated</div>
+      </div>
+      <div class="case-rule"></div>
+      <div>
+        <div class="case-stat-num accent">20%</div>
+        <div class="case-stat-label">Creator payout on tracked sales</div>
+      </div>
+    </div>
+    <div class="case-left">
+      <div class="case-tag">Multi-Brand Store · Beauty · Fashion · Home · Jewellery</div>
+      <div class="case-title">Multi-brand store achieves 57% increase in conversions within 2 months.</div>
+      <div class="case-body">
+        A multi-category retailer spanning beauty, fashion, home, and jewellery had been on GoWish for over two years — but hadn't unlocked its full potential. After upgrading to Premium and activating data-powered personalisation, GoWish's algorithm matched their products to the right high-intent shoppers.<br><br>
+        Within 2 months: +57% conversions, +98% wishes, $1.7M in attributed revenue.
+      </div>
+      <div style="margin-top: 20px; font-size: 12px; color: var(--muted); font-weight: 300; font-style: italic;">Brand anonymised per GoWish privacy policy — we work with 61,000+ brands and respect their revenue data.</div>
+    </div>
+  </div>
+  <span class="logo-mark logo-mark-dark">GoWish</span>
+</div>
+
+<!-- ── SLIDE 9: CLOSING ── -->
+<div class="slide slide-dark slide-closing">
+  <p class="eyebrow eyebrow-light">Let's build together</p>
+  <h2 class="display display-xl" style="color: var(--paper); text-align: center; max-width: 14ch; margin: 0 auto;">
+    Let's turn your<br>audience into<br><span class="accent">revenue.</span>
+  </h2>
+  <div class="contact-block">
+    <div class="contact-name">GoWish Partnerships</div>
+    <div class="contact-title">Creator × Brand Programme</div>
+    <div class="contact-email">jn@GoWish.com</div>
+  </div>
+  <span class="logo-mark logo-mark-light" style="opacity: 0.35; font-size: 18px;">GoWish</span>
+</div>
+
+<script>
+  // Scale slides to fit screen width for preview
+  function scaleSlides() {
+    const slides = document.querySelectorAll('.slide');
+    const scale = Math.min(window.innerWidth / 1920, 1);
+    slides.forEach(s => {
+      s.style.transform = `scale(${scale})`;
+      s.style.marginBottom = `${(1080 * scale) - 1080 + 4}px`;
+    });
+  }
+  scaleSlides();
+  window.addEventListener('resize', scaleSlides);
+</script>
+</body>
+</html>
